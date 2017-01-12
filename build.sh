@@ -3,10 +3,11 @@
 
 set -e
 echo --Compiling boot loader--
-nasm -f bin bootloader/Boot1.asm -o bootloader/bin/Boot1.bin
+mkdir -p bin
+nasm -f bin src/bootloader/Boot1.asm -o bin/Boot1.bin
 
 echo --Copying to raw image--
-dd if=bootloader/bin/Boot1.bin count=1b of=bin/custom-os.raw
+dd if=bin/Boot1.bin count=1b of=bin/custom-os.raw
 
 set +e
 echo --Removing previous virtual machine--
